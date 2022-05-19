@@ -105,6 +105,33 @@ def pie_plot(df, groupby_list):
 pie_plot(data, [("var1", "var2"), ("var3", "var4")])
      
 # Bivariate Analysis
+          
+# 1. Numeric
+          
+# 1.1. Scatter Plot
+def scatter_plot(df, cols, x, y):
+    [df.plot.scatter(x=col[0],y=col[1],figsize=(23, 5), subplots=True, layout=(x,y)) for col in cols]
+    plt.show()
+
+scatter_plot(data, [("TICKETS SOLD", "YEAR"), ("TICKETS SOLD", "YEAR")], 1, 2)
+
+# 1.2. Correlation Plot
+def corr_plot(df, method):
+    return df.corr(method=method).style.background_gradient(cmap='PuBuGn',axis=None).set_precision(1)
+
+corr_plot(data, 'kendall')
+# pearson : standard correlation coefficient
+# kendall : Kendall Tau correlation coefficient
+# spearman : Spearman rank correlation
+
+# 2. Categoric
+
+# 2.1. Correlation Plot          
+def crosstab_plot(df, crosstab_list,x, y):
+    [pd.crosstab(df[var[0]],df[var[1]]).plot.bar(rot=0, figsize=(15, 5), layout=(x,y)) for var in crosstab_list]
+    plt.show()
+        
+crosstab_plot(data, [("DISTRIBUTOR", "MPAA RATING"), ("DISTRIBUTOR", "GENRE")], 5, 3)
 
      
 
