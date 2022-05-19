@@ -2,6 +2,9 @@
 # Basic Exploration
 """--------------"""
 
+# Dataframe Profiling
+ProfileReport(data, minimal=True, progress_bar=False).to_widgets()
+
 # Display the Number of Variables & Number of Observations
 df.shape
 
