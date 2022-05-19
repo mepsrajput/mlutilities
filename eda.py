@@ -1,3 +1,7 @@
+""" -------------"""
+# Basic Exploration
+"""--------------"""
+
 # Display the Number of Variables & Number of Observations
 df.shape
 
@@ -16,7 +20,11 @@ df.count()
 # Display the Metadata of the dataset
 df.info()
 
+
+""" -------------"""
 # Handling Duplicates
+"""--------------"""
+
 # 1. Check duplicates
 df.duplicated()
 
@@ -26,7 +34,11 @@ df.drop_duplicates()
 # 3. Drop duplicates - on a Column
 df.drop_duplicates(subset='User_ID')
 
+
+""" -------------"""
 # Handling Outliers
+"""--------------"""
+
 # 1. Detecting Outliers
 def detect_outliers(df, var_list):
   for var in var_list:
@@ -53,7 +65,11 @@ def clip_outliers(df, var_list):
           
 clip_outliers(df, [var1, var2])
           
+          
+""" -------------"""
 # Handling Missing
+"""--------------"""
+          
 # 1. Detecting the Missing Values
 # percentage of missing values in each variable  
 def missing_checker(df)
@@ -78,7 +94,11 @@ def drop_var(df, var_list):
           
 drop_var(df, [var1, var2])
           
+                    
+""" -------------"""
 # Univariate Analysis
+"""--------------"""
+          
 # 1. Numeric
           
 # 1.1 Histogram 
@@ -104,7 +124,10 @@ def pie_plot(df, groupby_list):
         
 pie_plot(data, [("var1", "var2"), ("var3", "var4")])
      
+          
+""" -------------"""
 # Bivariate Analysis
+"""--------------"""
           
 # 1. Numeric
           
