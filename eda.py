@@ -23,6 +23,17 @@ df.count()
 # Display the Metadata of the dataset
 df.info()
 
+# Frequency distribution of categoric variables
+def freq(df, freq_list):
+    freq_output = [
+        pd.DataFrame({'dist': df[var].value_counts(dropna=False),
+        '%': (df[var].value_counts(normalize=True, dropna=False)*100).round(1).astype(str) + ' %'
+    }) for var in freq_list]
+    
+    return freq_output
+        
+freq(data, ["DISTRIBUTOR","MPAA RATING","GENRE"])
+
 
 """ -------------"""
 # Handling Duplicates
