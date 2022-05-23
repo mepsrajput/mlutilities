@@ -1,3 +1,3 @@
 # mlutilities
 
-Handy ML Utilities
+Handy ML Utilities for Data Science
