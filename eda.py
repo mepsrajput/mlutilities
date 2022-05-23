@@ -11,19 +11,27 @@ df.shape
 # Display the Variable Names and their Data Types
 df.dtypes
 
-# Descriptive Statistics
+# Describe Numeric Cols
 df.describe()
 
-# Descriptive Statistics - Include the categoric vars
+# Describe Numeric Cols - Include the categoric vars
 df.describe(include = 'all')
 
 # Count the Number of Non-Missing Values for each Variable
 df.count()
 
-# Display the Metadata of the dataset
+# Dataframe Summary
 df.info()
 
-# Frequency distribution of categoric variables
+# Unique values in each col
+df.nunique(dropna = False)
+
+# Describe Categoric Cols - Distinct Values
+def distinct_val(cat_list):
+    [print(col,"\n", data[col].unique(), "\n") for col in cat_list]
+distinct_val(['YEAR', 'DISTRIBUTOR', 'GENRE'])
+
+# Describe Categoric Cols - Distinct Values with Count
 def freq(df, freq_list):
     freq_output = [
         pd.DataFrame({'dist': df[var].value_counts(dropna=False),
@@ -34,81 +42,11 @@ def freq(df, freq_list):
         
 freq(data, ["DISTRIBUTOR","MPAA RATING","GENRE"])
 
-
-""" -------------"""
-# Handling Duplicates
-"""--------------"""
-
-# 1. Check duplicates
-df.duplicated()
-
-# 2. Drop duplicates
-df.drop_duplicates()
-
-# 3. Drop duplicates - on a Column
-df.drop_duplicates(subset='User_ID')
+# ON_WHICH_COLUMNS.groupby(WHAT_TO_AGGREGATE).WHICH_AGGREGATION()
+df[['on_col1', 'on_col2']].groupby(df['agg_col']).agg_function()
+# Min, Max, Mean, Median, Count
 
 
-""" -------------"""
-# Handling Outliers
-"""--------------"""
-
-# 1. Detecting Outliers
-def detect_outliers(df, var_list):
-  for var in var_list:
-    min = df.var.min()
-    p25 = df.var.quantile(0.25)
-    median = df.var.quantile(0.5)
-    p75 = df.var.quantile(0.75)
-    max = df.var.max()
-    iqr = q75-p25
-    lc = q25 - 1.5*iqr
-    uc = q75 + 1.5*iqr
-    print(f"min_{var}: min, max_{var}: max, lc_{var}: lc , uc{var}: uc)
-    df.var.plot(kind='box')
-
-detect_outliers(df, [var1, var2])
-          
-# 2. Outlier Treatment
-# 2.1 Clipping
-def clip_outliers(df, var_list):
-  for var in var_list:          
-    df.var.clip(upper=uc, inplace=True)
-    df.var.clip(lower=lc, inplace=True)
-    df.var.plot(kind='box')
-          
-clip_outliers(df, [var1, var2])
-          
-          
-""" -------------"""
-# Handling Missing
-"""--------------"""
-          
-# 1. Detecting the Missing Values
-# percentage of missing values in each variable  
-def missing_checker(df)
-  df.isna().sum()/df.shape[0]
-
-missing_checker(df)
-    
-# 2. Missing Value Treatment
-# 2.1 Impute by Mode
-def impute_mode(df, var_list):
-  for var in var_list:        
-    df.var.fillna(df.var.mode()[0],inplace=True)
-    missing_checker(df)
-          
-impute_mode(df, [var1, var2])
-          
-# 2.2 Drop the Var
-def drop_var(df, var_list):
-  for var in var_list:        
-    df.var.dropna(axis=1,inplace=True)
-    missing_checker(df)
-          
-drop_var(df, [var1, var2])
-          
-                    
 """ -------------"""
 # Univariate Analysis
 """--------------"""
@@ -169,34 +107,3 @@ def crosstab_plot(df, crosstab_list,x, y):
     plt.show()
         
 crosstab_plot(data, [("DISTRIBUTOR", "MPAA RATING"), ("DISTRIBUTOR", "GENRE")], 5, 3)
-
-     
-
-
-
-               
-          
-          
-          
-
-
-      
-          
-
-
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
