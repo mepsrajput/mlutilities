@@ -70,3 +70,15 @@ def drop_var(df, var_list):
     missing_checker(df)
           
 drop_var(df, [var1, var2])
+      
+          
+""" -------------"""
+# Combine
+"""--------------"""    
+          
+# 1. Horizontally
+pd.merge(df1, df2, how="right", left_on="df1_key", right_on="df1_key")
+# how: left, right, inner, outer, cross
+   
+# 2. Verically
+pd.concat([df1,df2], ignore_index=True)
